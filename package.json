@@ -1,5 +1,5 @@
 {
-  "version": "0.3.19",
+  "version": "0.4.0",
   "name": "antd-phone-input",
   "description": "Advanced, highly customizable phone input component for Ant Design.",
   "keywords": [
@@ -46,13 +46,6 @@
         "default": "./styles.d.ts"
       }
     },
-    "./locale": {
-      "import": "./locale.js",
-      "require": "./locale.cjs.js",
-      "types": {
-        "default": "./locale.d.ts"
-      }
-    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -67,7 +60,7 @@
   "scripts": {
     "rename": "bash -c 'for file in *.js; do mv $file \"${file%.js}.$0.js\"; done'",
     "build": "tsc --module commonjs && npm run rename -- cjs && tsc --declaration",
-    "prebuild": "rm -r resources index* locale* types* styles* || true",
+    "prebuild": "rm -r resources index* types* styles* || true",
     "postpack": "tsx scripts/prepare-package.ts",
     "test": "jest --config jestconfig.json",
     "postbuild": "cp -r src/resources ."
@@ -78,7 +71,7 @@
     "react": ">=16"
   },
   "dependencies": {
-    "react-phone-hooks": "^0.1.18"
+    "react-phone-hooks": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

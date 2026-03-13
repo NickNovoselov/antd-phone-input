@@ -33,8 +33,8 @@ import {
     useMask,
     usePhone,
 } from "react-phone-hooks";
+import {Locale} from "react-phone-hooks/types";
 
-import locale from "./locale";
 import {injectMergedStyles} from "./styles";
 import {PhoneInputProps, PhoneNumber} from "./types";
 
@@ -77,12 +77,12 @@ const PhoneInput = forwardRef(({
     const [minWidth, setMinWidth] = useState<number>(0);
     const [countryCode, setCountryCode] = useState<string>(country);
 
+    const phoneInputLocale: Locale = (locale as any).PhoneInput || {}
     const {
-        locale: localeIdentifier,
         searchNotFound = defaultSearchNotFound,
         searchPlaceholder = defaultSearchPlaceholder,
         countries = new Proxy({}, ({get: (_: any, prop: any) => prop})),
-    } = (locale as any).PhoneInput || {};
+    } = phoneInputLocale;
 
     const prefixCls = getPrefixCls();
     injectMergedStyles(prefixCls);
@@ -103,7 +103,7 @@ const PhoneInput = forwardRef(({
         excludeCountries,
         preferredCountries,
         disableParentheses,
-        locale: localeIdentifier,
+        locale: phoneInputLocale,
     });
 
     const {
@@ -125,7 +125,7 @@ const PhoneInput = forwardRef(({
             path.push(formName);
             fieldName = fieldName.slice(formName.length + 1);
         }
-        return path.concat(fieldName.split("_"));
+        return path.concat(fieldName.split("_")).slice(1);
     }, [antInputProps, formContext])
 
     const phoneValue = useWatch(namePath, formInstance);
@@ -320,4 +320,4 @@ const PhoneInput = forwardRef(({
 })
 
 export default PhoneInput;
-export {PhoneInputProps, PhoneNumber, locale};
+export {PhoneInputProps, PhoneNumber};

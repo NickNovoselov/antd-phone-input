@@ -59,17 +59,20 @@ The `valid` function primarily checks if a phone number has a length appropriate
 
 ## Localization
 
-The package provides a built-in localization feature that allows you to change the language of the component. The `locale` function returns the language object that can be passed to the `ConfigProvider` component of Ant Design.
+The `react-phone-hooks` package, which is installed as a core dependency of the `PhoneInput` component, includes ready‑to‑use locale files for many languages. Simply import the one you need and pass it to the `ConfigProvider`.
 
 ```javascript
-import PhoneInput, {locale} from "antd-phone-input";
+import PhoneInput from "antd-phone-input";
+import frFR from "antd/locale/fr_FR";
+import frFRPhoneInput from "react-phone-hooks/locale/fr_FR";
 
-<ConfigProvider locale={locale("frFR")}>
+<ConfigProvider locale={{
+    ...frFR,
+    PhoneInput: frFRPhoneInput
+}}>
   <PhoneInput/>
 </ConfigProvider>
 ```
-
-NOTE: If you use localization in the [documented](https://ant.design/docs/react/i18n) way, you should replace the object passed to the `locale` property with the `locale` function, specifying the desired language code.
 
 ## Props
 
