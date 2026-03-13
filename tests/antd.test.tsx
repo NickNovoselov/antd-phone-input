@@ -6,7 +6,10 @@ import ConfigProvider from "antd/lib/config-provider";
 import userEvent from "@testing-library/user-event";
 import {act, render, screen} from "@testing-library/react";
 
-import PhoneInput, {locale} from "../src";
+import PhoneInput from "../src";
+import frFr from "antd/locale/fr_FR";
+import {Locale} from "antd/es/locale";
+import frFrPhoneInput from "react-phone-hooks/locale/fr_FR";
 
 Object.defineProperty(console, "error", {
     value: jest.fn(),
@@ -66,7 +69,7 @@ describe("Checking the basic rendering and functionality", () => {
     })
 
     it("Localization support check", async () => {
-        const {container, getByText} = render(<ConfigProvider locale={locale("frFR")}>
+        const {container, getByText} = render(<ConfigProvider locale={{ ...frFr, PhoneInput: frFrPhoneInput } as Locale}>
             <PhoneInput onlyCountries={["am"]}/>
         </ConfigProvider>);
         await act(async () => {
